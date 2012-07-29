@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 import TimeUnit._
 import java.lang.{ Double => JDouble }
 
+@deprecated("When ScalaWords uses Scala 2.10 this should be removed")
 object Duration {
   implicit def timeLeft(implicit d: Deadline): Duration = d.timeLeft
 
@@ -229,6 +230,7 @@ object Duration {
  * val d3 = d2 + 1.millisecond
  * </pre>
  */
+@deprecated("When ScalaWords uses Scala 2.10 this should be removed")
 abstract class Duration extends Serializable with Ordered[Duration] {
   def length: Long
   def unit: TimeUnit

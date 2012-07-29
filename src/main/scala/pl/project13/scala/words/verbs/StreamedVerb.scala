@@ -1,16 +1,12 @@
 package pl.project13.scala.words.verbs
 
-import _root_.tv.yap.mongo._
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.MongoMetaRecord
-import com.mongodb.DBObject
+import com.mongodb.{DBCursor, DBObject, Bytes}
 import net.liftweb.mongodb.MongoDB
 import scala.Some
-import com.mongodb.Bytes
 
-class StreamedVerb {
-
-}
+trait StreamedVerb extends MongoStreamedVerb
 
 trait MongoStreamedVerb {
 
@@ -33,4 +29,15 @@ trait MongoStreamedVerb {
       }
     }
   }
+
+  def withCursor[T](createCursor: => DBCursor)(f: DBCursor => T) = {
+    val c = createCursor
+    try {
+      f(c)
+    } finally {
+      c.close()
+    }
+  }
 }
+
+object StreamedVerb extends StreamedVerb

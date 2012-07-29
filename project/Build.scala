@@ -23,13 +23,13 @@ object Dependencies {
   val scalaRainbow          = "pl.project13.scala"     % "rainbow_2.9.1"          % "0.1"
 
   val slf4s                 = "com.weiglewilczek.slf4s" %% "slf4s"                % "1.0.7"
-  val logback               = "ch.qos.logback"        % "logback-classic"         % "1.0.0"
-  val log4jOverSlf4j        = "org.slf4j"             % "log4j-over-slf4j"        % "1.6.1"
-  val jclOverSlf4j          = "org.slf4j"             % "jcl-over-slf4j"          % "1.6.1"
-  val julToSlf4jBridge      = "org.slf4j"             % "jul-to-slf4j"            % "1.6.1"
+  val logback               = "ch.qos.logback"           % "logback-classic"         % "1.0.0"
+  val log4jOverSlf4j        = "org.slf4j"                % "log4j-over-slf4j"        % "1.6.1"
+  val jclOverSlf4j          = "org.slf4j"                % "jcl-over-slf4j"          % "1.6.1"
+  val julToSlf4jBridge      = "org.slf4j"                % "jul-to-slf4j"            % "1.6.1"
   val logging               = Seq(slf4s, logback, log4jOverSlf4j, jclOverSlf4j)
 
-//  val liftMongoRecord       = "net.liftweb"             %% "lift-mongodb-record"   % Versions.liftVersion
+  val liftMongoRecord       = "net.liftweb"            %% "lift-mongodb-record"   % Versions.liftVersion
   val mongo                 = "org.mongodb"            %  "mongo-java-driver"     % "2.7.3"
   val rogue                 = "com.foursquare"         %% "rogue"                 % "1.1.8" intransitive()
 
@@ -45,6 +45,7 @@ object BuildSettings {
 
   val generalDependencies = Seq(
     guava,
+    mongo, liftMongoRecord, rogue,
     scalaRainbow,
     scalaTest, mockito
   ) ++ logging
