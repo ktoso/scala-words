@@ -1,6 +1,6 @@
 package pl.project13.scala.words.verbs
 
-import collection.mutable._
+import collection.mutable
 
 /**
  * Enables you to create unique collections of any type, such as Lists, Maps etc,
@@ -26,7 +26,7 @@ trait UniquifyVerb {
    * in the output collection.
    */
   def uniquifyBy[A, B](list: List[A])(onKey: A => B): List[A] = {
-    (Map[B, A]() ++ list.map(el => (onKey(el) -> el))).values.toList
+    (mutable.Map[B, A]() ++ list.map(el => (onKey(el) -> el))).values.toList
   }
 
   def uniquifyByMerge[A, B](list: List[A])(onKey: A => B, merge: (A, A) => A): List[A] = {

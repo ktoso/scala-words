@@ -2,8 +2,8 @@ package pl.project13.scala.words.verbs
 
 import com.google.common.base.{Ticker, Stopwatch}
 import com.weiglewilczek.slf4s.Logger
+import pl.project13.scala.concurrent.util.Duration
 
-// todo problem as we'd require akka to use duration... scala 2.10 would be cool i guess
 trait TimedVerb {
 
   lazy val ticker: Ticker = Ticker.systemTicker

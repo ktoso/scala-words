@@ -1,6 +1,5 @@
 package pl.project13.scala.words.verbs
 
-import tv.yap.common.util.TimedVerb
 import org.scalatest.matchers.ShouldMatchers
 import com.google.common.base.Ticker
 import org.scalatest.FlatSpec
@@ -28,8 +27,10 @@ class TimedVerbTest extends FlatSpec with ShouldMatchers {
     var debugLoggedMsg = ""
     var infoLoggedMsg = ""
 
-    val ticker = new Ticker { def read() = 1000 }
-    val timedVerb = new TimedVerb(ticker)
+    val myTicker = new Ticker { def read() = 1000 }
+    val timedVerb = new TimedVerb {
+      override lazy val ticker = myTicker
+    }
 
     // when
     timedVerb.timedAndLogged(new Logger {
@@ -53,8 +54,10 @@ class TimedVerbTest extends FlatSpec with ShouldMatchers {
     var debugLoggedMsg = ""
     var infoLoggedMsg = ""
 
-    val ticker = new Ticker { def read() = 0 }
-    val timedVerb = new TimedVerb(ticker)
+    val myTicker = new Ticker { def read() = 0 }
+    val timedVerb = new TimedVerb {
+      override lazy val ticker = myTicker
+    }
 
     // when
     timedVerb.timedAndLoggedIfTimeNot(_.elapsedMillis == 0)(new Logger {
@@ -78,8 +81,10 @@ class TimedVerbTest extends FlatSpec with ShouldMatchers {
     var debugLoggedMsg = ""
     var infoLoggedMsg = ""
 
-    val ticker = new Ticker { def read() = 100 }
-    val timedVerb = new TimedVerb(ticker)
+    val myTicker = new Ticker { def read() = 100 }
+    val timedVerb = new TimedVerb {
+      override lazy val ticker = myTicker
+    }
 
     // when
     timedVerb.timedAndLoggedIfTimeNot(_.elapsedMillis > 10 )(new Logger {

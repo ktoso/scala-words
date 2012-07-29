@@ -22,7 +22,6 @@ class UniquifyVerbTest extends FlatSpec with ShouldMatchers
     uniques should (contain (Data(1, 3)) and contain (Data(2, 3)))
   }
 
-
   "uniquifyByMerge" should "use the merge function to resolve conflicts" in {
     // given
     val list = Data(1, 1) :: Data(1, 2) :: Data(1, 3) :: Data(2, 3) :: Nil
