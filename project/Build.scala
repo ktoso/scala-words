@@ -10,13 +10,15 @@ object Resolvers {
 
 object Versions {
   val guava = "12.0"
+  val akka = "2.1-M1"
+  val liftVersion = "2.4"
 }
 
 object Dependencies {
   import Resolvers._
   import Versions._
 
-  val guava        = "com.google.guava"  % "guava"          % Versions.guava
+  val guava                 = "com.google.guava"  % "guava"          % Versions.guava
 
   val scalaRainbow          = "pl.project13.scala"     % "rainbow_2.9.1"          % "0.1"
 
@@ -26,6 +28,10 @@ object Dependencies {
   val jclOverSlf4j          = "org.slf4j"             % "jcl-over-slf4j"          % "1.6.1"
   val julToSlf4jBridge      = "org.slf4j"             % "jul-to-slf4j"            % "1.6.1"
   val logging               = Seq(slf4s, logback, log4jOverSlf4j, jclOverSlf4j)
+
+//  val liftMongoRecord       = "net.liftweb"             %% "lift-mongodb-record"   % Versions.liftVersion
+  val mongo                 = "org.mongodb"            %  "mongo-java-driver"     % "2.7.3"
+  val rogue                 = "com.foursquare"         %% "rogue"                 % "1.1.8" intransitive()
 
   // testing
   val scalaTest = "org.scalatest"    %% "scalatest"      % "1.7.RC1" % "test"
@@ -61,7 +67,7 @@ object ScalaWordsBuild extends Build {
 //  compileOrder := CompileOrder.JavaThenScala
 
   lazy val root = Project (
-    "kanbanery",
+    "scala-words",
     file("."),
     settings = buildSettings ++
       Seq (
