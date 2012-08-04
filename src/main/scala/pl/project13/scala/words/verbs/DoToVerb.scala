@@ -8,8 +8,8 @@ package pl.project13.scala.words.verbs
  */
 trait DoToVerb {
 
-  def doTo[T](it: T)(block: T => Unit): T = {
-    block(it)
+  def doTo[T](it: T)(operations: Function1[T, Unit]*): T = {
+    operations foreach { _.apply(it) }
     it
   }
 
