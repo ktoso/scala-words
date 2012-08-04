@@ -13,9 +13,13 @@ cp -r docs/_build/html/* .
 rm -rf target/ docs/
 
 mv _static static
-find ./ -type f -exec sed -i ‘s/_static/static/’ {} \;
 mv _sources sources
-find ./ -type f -exec sed -i ‘s/_sources/sources/’ {} \;
+
+find ./**/*html -type f -exec gsed -i 's/_static/static/' {} \;
+find ./*html -type f -exec gsed -i 's/_static/static/' {} \;
+
+find ./*html -type f -exec gsed -i 's/_sources/sources/' {} \;
+find ./**/*html -type f -exec gsed -i 's/_sources/sources/' {} \;
 
 git add .
 git ci -m "Updating documentation @ $(date)"
