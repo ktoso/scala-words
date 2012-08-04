@@ -7,3 +7,7 @@ Travis CI Status
 
 License
 =======
+ScalaWords is licensed under the **Apache 2 license**,
+you're free to use it with accordance to it.
+
+Additional note: It'd be awesome if you suggest some new word, or improvements - use the Issues section! :-)
