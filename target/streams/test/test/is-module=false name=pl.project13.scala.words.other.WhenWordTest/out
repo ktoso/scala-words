@@ -1,7 +1,0 @@
-[0m[[0minfo[0m] [0m[32mWhenWordTest:[0m[0m
-[0m[[0minfo[0m] [0m[32mWhenWord [0m[0m
-[0m[[0minfo[0m] [0m[32m- should print '' instead of a String when(false)[0m[0m
-[0m[[0minfo[0m] [0m[32m- should print the String when(false)[0m[0m
-[0m[[0minfo[0m] [0m[32mon Option[A] [0m[0m
-[0m[[0minfo[0m] [0m[32m- should return None when(false)[0m[0m
-[0m[[0minfo[0m] [0m[32m- should return the Option when(true)[0m[0m

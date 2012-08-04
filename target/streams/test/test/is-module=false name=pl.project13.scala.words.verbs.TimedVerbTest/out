@@ -1,7 +1,0 @@
-[0m[[0minfo[0m] [0m[32mTimedVerbTest:[0m[0m
-[0m[[0minfo[0m] [0m[32mTimedVerb [0m[0m
-[0m[[0minfo[0m] [0m[32m- should measure time spent in block[0m[0m
-[0m[[0minfo[0m] [0m[32m  + took: 113 [0m[0m
-[0m[[0minfo[0m] [0m[32m- should should log time spent in block on info[0m[0m
-[0m[[0minfo[0m] [0m[32m- should not log if the time was 0ms[0m[0m
-[0m[[0minfo[0m] [0m[32m- should log if the time was above 10ms[0m[0m
