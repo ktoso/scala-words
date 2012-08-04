@@ -17,5 +17,8 @@ git add .
 git ci -m "Updating documentation @ $(date)"
 git push origin gh-pages
 
-echo "Done!"
+git stash
+git stash drop
 git checkout master
+
+echo "Done!"
