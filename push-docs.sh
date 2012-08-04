@@ -6,9 +6,11 @@ make pdf
 
 cd ..
 
+git stash
+git stash drop
 git checkout gh-pages
 
-mv docs/_build/html/* .
+cp -r docs/_build/html/* .
 rm -rf target/ docs/
 
 git add .
