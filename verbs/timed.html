@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Timed &mdash; Scala Words - Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/base.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Exo:300,400,600,700" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/toc.js"></script>
+    <script type="text/javascript" src="../_static/prettify.js"></script>
+    <script type="text/javascript" src="../_static/highlightCode.js"></script>
+    <script type="text/javascript" src="../_static/effects.core.js"></script>
+    <script type="text/javascript" src="../_static/effects.highlight.js"></script>
+    <script type="text/javascript" src="../_static/scrollTo.js"></script>
+    <script type="text/javascript" src="../_static/contentsFix.js"></script>
+    <script type="text/javascript" src="../_static/ga.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Scala Words - Documentation" href="../index.html" />
+    <link rel="up" title="Verbs" href="index.html" />
+    <link rel="next" title="Ask" href="ask.html" />
+    <link rel="prev" title="Retry" href="repeat.html" />
+
+  </head>
+  <body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="navbar-logo">
+        </div>    
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="container">
+      <div class="page-title" style="padding-top:0.75em">
+        <a href="../index.html" style="color: white; background: url(../_static/logo-small.png) no-repeat; height: 40px; padding-left: 62px; padding-top: 1em; margin-top: 1em; padding-bottom: 0.5em">
+        <span style="padding-bottom: 1em">Timed
+        </a>
+      </div>
+      <div class="pdf-link"><a href="../ScalaSlides.pdf"><img src="../_static/pdf-icon.png" style="height: 40px;" /></a></div>
+    </div>
+    <div class="main-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">           
+              <li>
+                 <span class="divider">|</span> <a href="ask.html">Ask</a> <span class="divider">»</span>
+              </li>
+              <li>
+                <a href="../index.html">Contents</a>
+              </li>
+              <li>
+                <span class="divider">«</span> <a href="repeat.html">Retry</a> <span class="divider">|</span>
+              </li>
+              <li>
+                Version 0.1
+              </li>
+            </ul>         
+          </div>
+        </div>
+        <div class="row">
+          <div class="span9">
+            
+  <div class="section" id="timed">
+<h1>Timed</h1>
+<div class="section" id="use-case">
+<h2>Use Case</h2>
+<p>You want to check how long some portion of your code takes to complete.</p>
+<p>You can either keep this information as a number, or automatically log it if it&#8217;s too high.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Duration</strong> is available in both Akka and Scala 2.10, but sadly not before, so for now ScalaWords uses a copied version of the Scala 2.10 implementaiton. It will be removed once more projects are using Scala 2.10.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>timed</h2>
+<p>The simplest version of <tt class="docutils literal"><span class="pre">timed</span></tt> returns a tuple, with both the time (a <tt class="docutils literal"><span class="pre">Stopwatch</span></tt> instance) the code took to execute, and the computed value. Exceptions are not eaten, they&#8217;ll be thrown up as you&#8217;d expect.</p>
+<div class="code scala highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span> <span class="k">=</span> <span class="n">timed</span> <span class="o">{</span>
+  <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">100</span><span class="o">)</span>
+  <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="o">}</span>
+
+<span class="n">println</span><span class="o">(</span><span class="s">&quot;Exection took: &quot;</span> <span class="o">+</span> <span class="n">time</span><span class="o">)</span>
+<span class="n">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="timedandlogged">
+<h2>timedAndLogged</h2>
+<p>One of many examples you might want to use this <em>Verb</em> is to log an information message if some block of code is taking too long to complete. You could do this on a method level using AOP, but just using this verb is way easier, and code weaving is something you have to think twice before using anyway ;-)</p>
+<div class="code scala highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">com.weiglewilczek.sfl4s.Logger</span>
+
+<span class="k">object</span> <span class="nc">Test</span> <span class="k">extends</span> <span class="nc">Logger</span> <span class="k">with</span> <span class="nc">TimedVerb</span> <span class="o">{</span>
+
+  <span class="k">val</span> <span class="n">hardMathProblemSolution</span> <span class="k">=</span> <span class="n">timedAndLogger</span><span class="o">(</span><span class="n">logger</span><span class="o">,</span> <span class="s">&quot;Hard math problem&quot;</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// DEBUG: Starting execution of timed block: [Hard math problem]</span>
+    <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">100</span><span class="o">)</span>
+    <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="c1">// INFO: Timed [Hard math problem] took: 100ms</span>
+  <span class="o">}</span>
+
+  <span class="n">assert</span> <span class="mi">4</span> <span class="o">==</span> <span class="n">hardMathProblemSolution</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">ScalaWords currently supports the <strong>com.weiglewilczek.slf4s.Logger</strong>, I&#8217;m thinking about a way to allow any logger to work with this API (without the use of <em>slow</em> Structural Types).</p>
+</div>
+</div>
+<div class="section" id="log-when-certain-conditions-are-met">
+<h2>Log when certain conditions are met</h2>
+<p>Sometimes you have a LOT of log messages like the above, which you don&#8217;t really care about.
+Let&#8217;s say most requests are handled within 5ms, but sometimes you get a spike and they take 100ms to process,
+that&#8217;s something worth logging as <em>WARN</em>.</p>
+<div class="code scala highlight-scala"><div class="highlight"><pre><span class="n">timedAndLoggedIf</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">elapsedMillis</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="o">)(</span><span class="n">logger</span><span class="o">,</span> <span class="s">&quot;Long Operation&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">doThings</span><span class="o">()</span> <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-with-timedverb">
+<h2>Testing with TimedVerb</h2>
+<p>As with anything that&#8217;s Time related, you&#8217;re probably already thinking &#8220;how would I test such code?&#8221;.
+<tt class="docutils literal"><span class="pre">Timed</span></tt> is smart enough to allow you to mock out the ticker it&#8217;s using, like this:</p>
+<div class="code scala highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">com.google.common.base.Ticker</span>
+
+<span class="k">trait</span> <span class="nc">TestTimedVerb</span> <span class="k">extends</span> <span class="nc">TimedVerb</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">lazy</span> <span class="k">val</span> <span class="n">ticker</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Ticker</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="n">read</span><span class="o">()</span> <span class="k">=</span> <span class="mi">0L</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="override-the-messages">
+<h2>Override the messages</h2>
+<p>You can override the messages being created by this trait.</p>
+<p>Setting loglevels manualy is not yet supported, but I&#8217;ll work on a way to use any logger - and then via callbacks you&#8217;ll be able to log on any level and any message.</p>
+</div>
+</div>
+
+
+          </div>
+          <div class="span3"><p class="contents-title">Contents</p>
+              <div id="scroller-anchor">
+                <div id="scroller">
+                  <div id="toc"></div>
+                </div>
+              </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+  <div class="container">
+    <ul>
+      <li><h5>ScalaWords</h5></li>
+      <li><a href="http://ktoso.github.com/scala-words">Documentation</a></li>
+      <li><a href="http://blog.project13.pl">Blog</a></li>
+    </ul>
+    <ul>
+      <li><h5>Contribute</h5></li>
+      <li><a href="http://github.com/ktoso/scala-words">Source Code</a></li>
+    </ul>
+    <ul>
+      <li><img src="../_static/watermark.png" align="center"/></li>
+    </ul>
+  </div>
+  <div class="container copyright">
+    <p style="float: left;">
+      © 2012 <a href="http://blog.project13.pl">Project13.pl</a> <span class="license">ScalaWords is Open Source and available under the Apache 2 License.</span>
+    </p>
+    <p style="float: right; font-size: 12px;">
+      Last updated: Aug 04, 2012
+    </p>
+  </div>
+</div>
+<script type="text/javascript">
+  $('#toc').toc();
+</script>
+  
+
+  </body>
+</html>

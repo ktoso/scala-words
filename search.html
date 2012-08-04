@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>ScalaWords Docs &mdash; Scala Words - Documentation</title>
+    <title>Search &mdash; Scala Words - Documentation</title>
     
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -30,6 +30,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/toc.js"></script>
     <script type="text/javascript" src="_static/prettify.js"></script>
     <script type="text/javascript" src="_static/highlightCode.js"></script>
@@ -39,8 +40,12 @@
     <script type="text/javascript" src="_static/contentsFix.js"></script>
     <script type="text/javascript" src="_static/ga.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Scala Words - Documentation" href="#" />
-    <link rel="next" title="Introduction" href="intro/index.html" />
+    <link rel="top" title="Scala Words - Documentation" href="index.html" />
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("searchindex.js"); });
+  </script>
+  
+
 
   </head>
   <body>
@@ -55,8 +60,8 @@
   <div class="main">
     <div class="container">
       <div class="page-title" style="padding-top:0.75em">
-        <a href="#" style="color: white; background: url(_static/logo-small.png) no-repeat; height: 40px; padding-left: 62px; padding-top: 1em; margin-top: 1em; padding-bottom: 0.5em">
-        <span style="padding-bottom: 1em">ScalaWords Docs
+        <a href="index.html" style="color: white; background: url(_static/logo-small.png) no-repeat; height: 40px; padding-left: 62px; padding-top: 1em; margin-top: 1em; padding-bottom: 0.5em">
+        <span style="padding-bottom: 1em">Search
         </a>
       </div>
       <div class="pdf-link"><a href="ScalaSlides.pdf"><img src="_static/pdf-icon.png" style="height: 40px;" /></a></div>
@@ -67,10 +72,9 @@
           <div class="span12">
             <ul class="breadcrumb">           
               <li>
-                 <span class="divider">|</span> <a href="intro/index.html">Introduction</a> <span class="divider">»</span>
               </li>
               <li>
-                <a href="#">Contents</a>
+                <a href="index.html">Contents</a>
               </li>
               <li>
               </li>
@@ -83,33 +87,29 @@
         <div class="row">
           <div class="span9">
             
-  <div class="section" id="scalawords-docs">
-<h1>ScalaWords Docs</h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro/index.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro/what-is-scala-words.html">What is Scala Words?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/getting-started.html">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro/getting-started.html#how-to-use-words">How to use Words?</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="verbs/index.html">Verbs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="verbs/do-to.html">Do To</a></li>
-<li class="toctree-l2"><a class="reference internal" href="verbs/repeat.html">Retry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="verbs/timed.html">Timed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="verbs/ask.html">Ask</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="links">
-<h1>Links</h1>
-<ul class="simple">
-<li><a class="reference external" href="https://github.com/ktoso/scala-words">Source Code</a></li>
-</ul>
-</div>
-
+  <h1 id="search-documentation">Search</h1>
+  <div id="fallback" class="admonition warning">
+  <script type="text/javascript">$('#fallback').hide();</script>
+  <p>
+    Please activate JavaScript to enable the search
+    functionality.
+  </p>
+  </div>
+  <p>
+    From here you can search these documents. Enter your search
+    words into the box below and click "search". Note that the search
+    function will automatically search for all of the words. Pages
+    containing fewer words won't appear in the result list.
+  </p>
+  <form action="" method="get">
+    <input type="text" name="q" value="" />
+    <input type="submit" value="search" />
+    <span id="search-progress" style="padding-left: 10px"></span>
+  </form>
+  
+  <div id="search-results">
+  
+  </div>
 
           </div>
           <div class="span3"><p class="contents-title">Contents</p>
