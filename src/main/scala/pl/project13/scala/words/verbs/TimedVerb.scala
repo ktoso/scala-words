@@ -14,17 +14,17 @@ trait TimedVerb {
     (stopwatch.stop(), value)
   }
 
-  def timedAndLoggedIfTime[T](test: Stopwatch => Boolean)
+  def timedAndLoggedIf[T](test: Stopwatch => Boolean)
                              (log: Logger, blockName: String, warnIfLongerThan: Option[Duration] = None, stopwatch: Stopwatch = new Stopwatch(ticker))
                              (block: => T) = {
     stopwatch.start()
 
-    log.debug("Starting execution of timed block: [" + blockName + "]")
+    log.debug(createTimedBlockStartInfoMessage(blockName))
 
     val it = block
 
     val took = stopwatch.stop().elapsedMillis()
-    lazy val msg = "Timed [" + blockName + "] took: " + took + "ms"
+    lazy val msg = createDoneBlockInfoMessage(blockName, took)
 
     warnIfLongerThan match {
       case Some(duration) => if (took > duration.toMillis) log.warn(msg) else log.debug(msg)
@@ -35,16 +35,26 @@ trait TimedVerb {
     it
   }
 
-  def timedAndLoggedIfTimeNot[T](test: Stopwatch => Boolean)
+  def timedAndLoggedIfNot[T](test: Stopwatch => Boolean)
                                 (log: Logger, blockName: String, warnIfLongerThan: Option[Duration] = None, stopwatch: Stopwatch = new Stopwatch(ticker))
                                 (block: => T) = {
-    timedAndLoggedIfTime({ !test(_) })(log, blockName, warnIfLongerThan, stopwatch)(block)
+    timedAndLoggedIf({ !test(_) })(log, blockName, warnIfLongerThan, stopwatch)(block)
   }
 
   def timedAndLogged[T](log: Logger, blockName: String, warnIfLongerThan: Option[Duration] = None, stopwatch: Stopwatch = new Stopwatch(ticker))
                        (block: => T) = {
-    timedAndLoggedIfTime(_ => true)(log, blockName, warnIfLongerThan, stopwatch)(block)
+    timedAndLoggedIf(_ => true)(log, blockName, warnIfLongerThan, stopwatch)(block)
   }
+
+  def createTimedBlockStartInfoMessage[T](blockName: String): String = {
+    "Starting execution of timed block: [" + blockName + "]"
+  }
+
+  def createDoneBlockInfoMessage[T](blockName: String, took: Long): String = {
+    "Timed [" + blockName + "] took: " + took + "ms"
+  }
+
+
 }
 
 object TimedVerb extends TimedVerb

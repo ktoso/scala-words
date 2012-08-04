@@ -60,7 +60,7 @@ class TimedVerbTest extends FlatSpec with ShouldMatchers {
     }
 
     // when
-    timedVerb.timedAndLoggedIfTimeNot(_.elapsedMillis == 0)(new Logger {
+    timedVerb.timedAndLoggedIfNot(_.elapsedMillis == 0)(new Logger {
       protected val slf4jLogger = null
 
       override def debug(msg: => String) {
@@ -87,7 +87,7 @@ class TimedVerbTest extends FlatSpec with ShouldMatchers {
     }
 
     // when
-    timedVerb.timedAndLoggedIfTimeNot(_.elapsedMillis > 10 )(new Logger {
+    timedVerb.timedAndLoggedIfNot(_.elapsedMillis > 10 )(new Logger {
       protected val slf4jLogger = null
 
       override def debug(msg: => String) {

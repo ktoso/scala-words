@@ -16,8 +16,8 @@ trait RetryVerb {
   def retry[T](times: Long,
                beforeEach: (Int) => Unit = {(n) =>},
                onException: (Int, Boolean, Throwable) => Unit = {(n, willRetry, exception) =>})
-              (block: => T): Either[Seq[Throwable], T] = {
-    val exceptions = new mutable.ListBuffer[Throwable]
+              (block: => T): Either[Seq[Exception], T] = {
+    val exceptions = new mutable.ListBuffer[Exception]
     var n = 1
 
     while (n <= times) {
@@ -25,7 +25,7 @@ trait RetryVerb {
         beforeEach(n)
         return Right(block)
       } catch {
-        case e =>
+        case e: Exception =>
           onException(n, n != times, e)
           exceptions += e
       }

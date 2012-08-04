@@ -10,15 +10,7 @@ trait WhenWord {
 
   implicit def stringWhen[A](s: Option[A]) = new OptionWhen(s)
 
-  def blockWithWhen[T](execute: => T) = new HasBlockWithWhen[T](execute)
-
-  class DoNotDoBlockUnlessTest[T](block: => T) {
-
-    @aliasFor("unless")
-    def ifNot(test: => Boolean) = unless(test)
-
-    def unless(test: => Boolean) = if(!test) block.some else None
-  }
+  implicit def blockWithWhen[T](execute: => T) = new HasBlockWithWhen[T](execute)
 
   class StringWhen(s: String) {
     def when(test: Boolean): String = if (test) s else ""
@@ -29,8 +21,7 @@ trait WhenWord {
   }
 
   class HasBlockWithWhen[T](block: => T) {
-    def when(test: => Boolean) =
-      if (test) block.some else None
+    def when(test: => Boolean) = if (test) block.some else None
   }
 }
 

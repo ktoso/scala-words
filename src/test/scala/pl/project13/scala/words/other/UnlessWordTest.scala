@@ -4,9 +4,9 @@ import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers
 
 class UnlessWordTest extends FlatSpec with ShouldMatchers
-with WhenWord {
+  with UnlessWord {
 
-  behavior of "WhenWord"
+  behavior of "UnlessWord"
 
   it should "print '' instead of a String when(false)" in {
     // given
@@ -14,10 +14,10 @@ with WhenWord {
     val conditionIsMet = false
 
     // when
-    val got = s.when(conditionIsMet)
+    val got = s.unless(conditionIsMet)
 
     // then
-    got should equal("")
+    got should equal(s)
   }
 
   it should "print the String when(false)" in {
@@ -26,10 +26,10 @@ with WhenWord {
     val conditionIsMet = true
 
     // when
-    val got = s.when(conditionIsMet)
+    val got = s.unless(conditionIsMet)
 
     // then
-    got should equal(s)
+    got should equal("")
   }
 
   "on Option[A]" should "return None when(false)" in {
@@ -38,10 +38,10 @@ with WhenWord {
     val conditionIsMet = false
 
     // when
-    val got = option.when(conditionIsMet)
+    val got = option.unless(conditionIsMet)
 
     // then
-    got should equal(None)
+    got should equal(option)
   }
 
   it should "return the Option when(true)" in {
@@ -50,9 +50,9 @@ with WhenWord {
     val conditionIsMet = true
 
     // when
-    val got = option.when(conditionIsMet)
+    val got = option.unless(conditionIsMet)
 
     // then
-    got should equal(option)
+    got should equal(None)
   }
 }
