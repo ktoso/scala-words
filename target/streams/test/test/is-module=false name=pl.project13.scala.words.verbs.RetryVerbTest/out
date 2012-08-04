@@ -1,0 +1,6 @@
+[0m[[0minfo[0m] [0m[32mRetryVerbTest:[0m[0m
+[0m[[0minfo[0m] [0m[32mRetryVerb [0m[0m
+[0m[[0minfo[0m] [0m[32m- should not retry if it's not required (function doesn't throw)[0m[0m
+[0m[[0minfo[0m] [0m[32m- should call onException 2 times, but finish OK and return Left[0m[0m
+[0m[[0minfo[0m] [0m[32m- should call beforeEach 3 times[0m[0m
+[0m[[0minfo[0m] [0m[32m- should return 3 exceptions[0m[0m

@@ -1,0 +1,6 @@
+[0m[[0minfo[0m] [0m[32mSimpleValuesAreSomeTest:[0m[0m
+[0m[[0minfo[0m] [0m[32mSimpleValuesAreSome [0m[0m
+[0m[[0minfo[0m] [0m[32m- should convert Int to some ints[0m[0m
+[0m[[0minfo[0m] [0m[32m- should convert Long to Some[0m[0m
+[0m[[0minfo[0m] [0m[32m- should convert Byte to Some[0m[0m
+[0m[[0minfo[0m] [0m[32m- should convert String to Some[0m[0m
