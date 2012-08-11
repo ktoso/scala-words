@@ -12,8 +12,8 @@ git checkout gh-pages
 cp -r docs/_build/html/* .
 rm -rf target/ docs/
 
-mv _static static
-mv _sources sources
+mv -f _static static
+mv -f _sources sources
 
 find ./**/*html -type f -exec gsed -i 's/_static/static/' {} \;
 find ./*html -type f -exec gsed -i 's/_static/static/' {} \;
