@@ -8,7 +8,7 @@ Unless is simply the inverse of ``if``. There is also an alias available, if you
 The nicer usecase comes with the implicit on ``String`` and ``AnyRef`` for which you can "return the given value unless something" (for strings "" will be returned, for other values None).
 
 Unless for strings
-==================
+------------------
 
 .. code-block:: scala
 
@@ -19,7 +19,7 @@ Unless for strings
   assert { msg == "the cake is NOT a lie." }
 
 Unless instead of if
-====================
+--------------------
 
 .. code-block:: scala
 
@@ -30,7 +30,7 @@ Unless instead of if
   assert(executed == Some(true))
 
 Unless on values
-================
+----------------
 
 On other values, it will generate an option, depenting on wether the condition was met or not.
 

@@ -91,9 +91,8 @@
 <p>Unless is simply the inverse of <tt class="docutils literal"><span class="pre">if</span></tt>. There is also an alias available, if you&#8217;re not too comfortable with &#8220;unless&#8221;, you can use &#8220;<tt class="docutils literal"><span class="pre">ifNot</span></tt>&#8221;. That&#8217;s the boring use case, and surely, not always recommended - just use if.</p>
 <p>The nicer usecase comes with the implicit on <tt class="docutils literal"><span class="pre">String</span></tt> and <tt class="docutils literal"><span class="pre">AnyRef</span></tt> for which you can &#8220;return the given value unless something&#8221; (for strings &#8220;&#8221; will be returned, for other values None).</p>
 </div>
-</div>
 <div class="section" id="unless-for-strings">
-<h1>Unless for strings</h1>
+<h2>Unless for strings</h2>
 <div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
 
 <span class="k">val</span> <span class="n">itIsALie</span> <span class="k">=</span> <span class="kc">false</span>
@@ -103,7 +102,7 @@
 </div>
 </div>
 <div class="section" id="unless-instead-of-if">
-<h1>Unless instead of if</h1>
+<h2>Unless instead of if</h2>
 <div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
 
 <span class="k">val</span> <span class="n">really</span> <span class="k">=</span> <span class="kc">false</span>
@@ -113,7 +112,7 @@
 </div>
 </div>
 <div class="section" id="unless-on-values">
-<h1>Unless on values</h1>
+<h2>Unless on values</h2>
 <p>On other values, it will generate an option, depenting on wether the condition was met or not.</p>
 <div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
 <span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">12345</span>
@@ -136,6 +135,7 @@
 <span class="c1">// then</span>
 <span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="mi">200</span><span class="o">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 
