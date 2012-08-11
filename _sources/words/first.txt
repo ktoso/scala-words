@@ -3,23 +3,30 @@ First
 
 Use Case
 --------
-You have a bunch of producers, which return ``Option[T]``, you want to keep trying one by one, until one of then returns ``Some``. FirstWord is useful here because it will not call the latter producers if one already returned what you want.
+You have multiple providers, returning ``Option[String]`` and you want to try them, in order,
+until one of them returns ``Some[String]``.
+
+This may be useful during "fallback" constructions.
 
 First not None
 --------------
-
-Try a few producers until one of them returns Some. The latter providers won't be called:
+Typically you would have some data providers and
 
 .. code-block:: scala
 
-  import FirstWord._
   import SomeWord._
-  
-  var counter = 0
-  def tryObtain(): Option[String] = None
-  def doObtain(): Option[String] = {
-    ("Got " + counter).some
+
+  // given
+  var getSomeCalledTimes = 0
+  def getNone(): Option[String] = None
+  def getSome(): Option[String] = {
+    getSomeCalledTimes += 1
+    "some".some
   }
 
-  val it = firstNotNone(tryObtain, tryObtain, doObtain, doObtain)
-  it == Some("Got 0")
+  // when
+  val got = firstNotNone(getNone, getNone, getSome, getSome)
+
+  // then
+  got should equal (Some("some"))
+  getSomeCalledTimes should equal (1)

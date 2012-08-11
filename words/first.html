@@ -88,22 +88,29 @@
 <h1>First</h1>
 <div class="section" id="use-case">
 <h2>Use Case</h2>
-<p>You have a bunch of producers, which return <tt class="docutils literal"><span class="pre">Option[T]</span></tt>, you want to keep trying one by one, until one of then returns <tt class="docutils literal"><span class="pre">Some</span></tt>. FirstWord is useful here because it will not call the latter producers if one already returned what you want.</p>
+<p>You have multiple providers, returning <tt class="docutils literal"><span class="pre">Option[String]</span></tt> and you want to try them, in order,
+until one of them returns <tt class="docutils literal"><span class="pre">Some[String]</span></tt>.</p>
+<p>This may be useful during &#8220;fallback&#8221; constructions.</p>
 </div>
 <div class="section" id="first-not-none">
 <h2>First not None</h2>
-<p>Try a few producers until one of them returns Some. The latter providers won&#8217;t be called:</p>
-<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">FirstWord._</span>
-<span class="k">import</span> <span class="nn">SomeWord._</span>
+<p>Typically you would have some data providers and</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">SomeWord._</span>
 
-<span class="k">var</span> <span class="n">counter</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">def</span> <span class="n">tryObtain</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
-<span class="k">def</span> <span class="n">doObtain</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="o">(</span><span class="s">&quot;Got &quot;</span> <span class="o">+</span> <span class="n">counter</span><span class="o">).</span><span class="n">some</span>
+<span class="c1">// given</span>
+<span class="k">var</span> <span class="n">getSomeCalledTimes</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="n">getNone</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+<span class="k">def</span> <span class="n">getSome</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="n">getSomeCalledTimes</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="s">&quot;some&quot;</span><span class="o">.</span><span class="n">some</span>
 <span class="o">}</span>
 
-<span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="n">firstNotNone</span><span class="o">(</span><span class="n">tryObtain</span><span class="o">,</span> <span class="n">tryObtain</span><span class="o">,</span> <span class="n">doObtain</span><span class="o">,</span> <span class="n">doObtain</span><span class="o">)</span>
-<span class="n">it</span> <span class="o">==</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;Got 0&quot;</span><span class="o">)</span>
+<span class="c1">// when</span>
+<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">firstNotNone</span><span class="o">(</span><span class="n">getNone</span><span class="o">,</span> <span class="n">getNone</span><span class="o">,</span> <span class="n">getSome</span><span class="o">,</span> <span class="n">getSome</span><span class="o">)</span>
+
+<span class="c1">// then</span>
+<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="s">&quot;some&quot;</span><span class="o">))</span>
+<span class="n">getSomeCalledTimes</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
