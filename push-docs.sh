@@ -9,11 +9,6 @@ cd ..
 git stash && git stash drop
 git checkout gh-pages
 
-cp -r docs/_build/html/* .
-rm -rf target/ docs/
-
-mv -f _static static
-mv -f _sources sources
 
 find ./**/*html -type f -exec gsed -i 's/_static/static/' {} \;
 find ./*html -type f -exec gsed -i 's/_static/static/' {} \;
@@ -21,7 +16,12 @@ find ./*html -type f -exec gsed -i 's/_static/static/' {} \;
 find ./*html -type f -exec gsed -i 's/_sources/sources/' {} \;
 find ./**/*html -type f -exec gsed -i 's/_sources/sources/' {} \;
 
-exit
+cp -r docs/_build/html/* .
+rm -rf target/ docs/
+
+mv -f _static static
+mv -f _sources sources
+
 
 git add .
 git ci -m "Updating documentation @ $(date)"
