@@ -11,10 +11,9 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
   it should "print '' instead of a String when(false)" in {
     // given
     val s = "Hello"
-    val conditionIsMet = false
 
     // when
-    val got = s.unless(conditionIsMet)
+    val got = s.unless(false)
 
     // then
     got should equal(s)
@@ -23,10 +22,9 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
   it should "print the String when(false)" in {
     // given
     val s = "Hello"
-    val conditionIsMet = true
 
     // when
-    val got = s.unless(conditionIsMet)
+    val got = s.unless(true)
 
     // then
     got should equal("")
@@ -35,10 +33,9 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
   "on Option[A]" should "return None when(false)" in {
     // given
     val option = "Hello"
-    val conditionIsMet = false
 
     // when
-    val got = option.unless(conditionIsMet)
+    val got = option.unless(false)
 
     // then
     got should equal(option)
@@ -54,5 +51,25 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
 
     // then
     got should equal (None)
+  }
+
+  it should "execute a block of code when unless(true)" in {
+    // given
+
+    // when
+    val value = { info("Executing..."); Some(true) } unless true
+
+    // then
+    value should equal (None)
+  }
+
+  it should "not execute a block of code when unless(true)" in {
+    // given
+
+    // when
+    val value = { info("Executing..."); true } unless false
+
+    // then
+    value should equal (Some(true))
   }
 }
