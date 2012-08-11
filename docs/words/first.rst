@@ -3,8 +3,7 @@ First
 
 Use Case
 --------
-You have multiple providers, returning ``Option[String]`` and you want to try them, in order,
-until one of them returns ``Some[String]``.
+You have multiple providers, returning ``Option[String]`` and you want to try them, in order, until one of them returns ``Some[String]``.
 
 This may be useful during "fallback" constructions.
 

@@ -8,7 +8,7 @@ trait UnlessWord {
 
   implicit def stringUnless(s: String) = new StringUnless(s)
 
-  implicit def optionUnless[T](s: Option[T]) = new OptionUnless(s)
+  implicit def anyUnless[T](s: AnyRef) = new AnyUnless(s)
 
   implicit def blockUnless[T](execute: => T) = new DoNotDoBlockUnlessTest(execute)
 
@@ -24,8 +24,9 @@ trait UnlessWord {
     def unless(test: Boolean): String = if (!test) s else ""
   }
 
-  class OptionUnless[A](o: Option[A]) {
-    def unless(test: Boolean): Option[A] = if (!test) o else None
+  class AnyUnless[A](o: A) {
+    def unless(test: Boolean): Option[A] = if (!test) Some(o) else None
   }
 
 }
+object UnlessWord extends UnlessWord

@@ -34,7 +34,7 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
 
   "on Option[A]" should "return None when(false)" in {
     // given
-    val option = Option("Hello")
+    val option = "Hello"
     val conditionIsMet = false
 
     // when
@@ -46,13 +46,13 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
 
   it should "return the Option when(true)" in {
     // given
-    val option = Option("Hello")
+    val option = 12344
     val conditionIsMet = true
 
     // when
-    val got = option.unless(conditionIsMet)
+    val got = option unless conditionIsMet
 
     // then
-    got should equal(None)
+    got should equal (None)
   }
 }
