@@ -6,7 +6,6 @@ make pdf
 
 cd ..
 
-git stash && git stash drop
 git checkout gh-pages
 
 
@@ -22,6 +21,7 @@ rm -rf target/ docs/
 mv -f _static static
 mv -f _sources sources
 
+read a
 
 git add .
 git ci -m "Updating documentation @ $(date)"
