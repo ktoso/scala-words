@@ -20,9 +20,21 @@ class ProgressableAdverbTest extends FlatSpec with ShouldMatchers
 
   it should "print progress for each percent of progress" in {
     // given
+    TotalItems
 
     // when
     1 to 1000 foreach { item => notifyProgress() }
+
+    // then
+    progressPrinted should have length (100)
+  }
+
+  it should "allow progressing in custom step sizes" in {
+    // given
+    TotalItems
+
+    // when
+    1 to 500 foreach { item => notifyProgress(2) }
 
     // then
     progressPrinted should have length (100)
