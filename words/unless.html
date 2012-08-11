@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>First &mdash; Scala Words - Documentation</title>
+    <title>Unless &mdash; Scala Words - Documentation</title>
     
     <link rel="stylesheet" href="../static/style.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -41,8 +41,7 @@
     <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="top" title="Scala Words - Documentation" href="../index.html" />
     <link rel="up" title="Words" href="index.html" />
-    <link rel="next" title="Unless" href="unless.html" />
-    <link rel="prev" title="Words" href="index.html" />
+    <link rel="prev" title="First" href="first.html" />
 
   </head>
   <body>
@@ -58,7 +57,7 @@
     <div class="container">
       <div class="page-title" style="padding-top:0.75em">
         <a href="../index.html" style="color: white; background: url(../static/logo-small.png) no-repeat; height: 40px; padding-left: 62px; padding-top: 1em; margin-top: 1em; padding-bottom: 0.5em">
-        <span style="padding-bottom: 1em">First
+        <span style="padding-bottom: 1em">Unless
         </a>
       </div>
       <div class="pdf-link"><a href="../ScalaSlides.pdf"><img src="../static/pdf-icon.png" style="height: 40px;" /></a></div>
@@ -69,13 +68,12 @@
           <div class="span12">
             <ul class="breadcrumb">           
               <li>
-                 <span class="divider">|</span> <a href="unless.html">Unless</a> <span class="divider">»</span>
               </li>
               <li>
                 <a href="../index.html">Contents</a>
               </li>
               <li>
-                <span class="divider">«</span> <a href="index.html">Words</a> <span class="divider">|</span>
+                <span class="divider">«</span> <a href="first.html">First</a> <span class="divider">|</span>
               </li>
               <li>
                 Version 0.1
@@ -86,34 +84,58 @@
         <div class="row">
           <div class="span9">
             
-  <div class="section" id="first">
-<h1>First</h1>
+  <div class="section" id="unless">
+<h1>Unless</h1>
 <div class="section" id="use-case">
-<h2>Use Case</h2>
-<p>You have multiple providers, returning <tt class="docutils literal"><span class="pre">Option[String]</span></tt> and you want to try them, in order, until one of them returns <tt class="docutils literal"><span class="pre">Some[String]</span></tt>.</p>
-<p>This may be useful during &#8220;fallback&#8221; constructions.</p>
+<h2>Use case</h2>
+<p>Unless is simply the inverse of <tt class="docutils literal"><span class="pre">if</span></tt>. There is also an alias available, if you&#8217;re not too comfortable with &#8220;unless&#8221;, you can use &#8220;<tt class="docutils literal"><span class="pre">ifNot</span></tt>&#8221;. That&#8217;s the boring use case, and surely, not always recommended - just use if.</p>
+<p>The nicer usecase comes with the implicit on <tt class="docutils literal"><span class="pre">String</span></tt> and <tt class="docutils literal"><span class="pre">AnyRef</span></tt> for which you can &#8220;return the given value unless something&#8221; (for strings &#8220;&#8221; will be returned, for other values None).</p>
 </div>
-<div class="section" id="first-not-none">
-<h2>First not None</h2>
-<p>Typically you would have some data providers and</p>
-<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">SomeWord._</span>
+</div>
+<div class="section" id="unless-for-strings">
+<h1>Unless for strings</h1>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
 
-<span class="c1">// given</span>
-<span class="k">var</span> <span class="n">getSomeCalledTimes</span> <span class="k">=</span> <span class="mi">0</span>
-<span class="k">def</span> <span class="n">getNone</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
-<span class="k">def</span> <span class="n">getSome</span><span class="o">()</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-  <span class="n">getSomeCalledTimes</span> <span class="o">+=</span> <span class="mi">1</span>
-  <span class="s">&quot;some&quot;</span><span class="o">.</span><span class="n">some</span>
-<span class="o">}</span>
-
-<span class="c1">// when</span>
-<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">firstNotNone</span><span class="o">(</span><span class="n">getNone</span><span class="o">,</span> <span class="n">getNone</span><span class="o">,</span> <span class="n">getSome</span><span class="o">,</span> <span class="n">getSome</span><span class="o">)</span>
-
-<span class="c1">// then</span>
-<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="s">&quot;some&quot;</span><span class="o">))</span>
-<span class="n">getSomeCalledTimes</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">itIsALie</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="k">val</span> <span class="n">msg</span> <span class="k">=</span> <span class="s">&quot;the cake is %sa lie.&quot;</span><span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;NOT &quot;</span><span class="o">.</span><span class="n">unless</span><span class="o">(</span><span class="n">itIsALie</span><span class="o">))</span>
+<span class="n">assert</span> <span class="o">{</span> <span class="n">msg</span> <span class="o">==</span> <span class="s">&quot;the cake is NOT a lie.&quot;</span> <span class="o">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="unless-instead-of-if">
+<h1>Unless instead of if</h1>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
+
+<span class="k">val</span> <span class="n">really</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="k">val</span> <span class="n">executed</span> <span class="k">=</span> <span class="s">&quot;executed&quot;</span><span class="o">.</span><span class="n">unless</span><span class="o">(</span><span class="n">really</span><span class="o">)</span>
+<span class="n">assert</span><span class="o">(</span><span class="n">executed</span> <span class="o">==</span> <span class="nc">Some</span><span class="o">(</span><span class="kc">true</span><span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unless-on-values">
+<h1>Unless on values</h1>
+<p>On other values, it will generate an option, depenting on wether the condition was met or not.</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
+<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">12345</span>
+<span class="k">val</span> <span class="n">errorsOccurred</span> <span class="k">=</span> <span class="kc">true</span>
+
+<span class="c1">// when</span>
+<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">value</span> <span class="n">unless</span> <span class="n">errorsOccurred</span>
+
+<span class="c1">// then</span>
+<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">None</span><span class="o">)</span>
+</pre></div>
+</div>
+<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
+<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">200</span>
+<span class="k">val</span> <span class="n">errorsOccurred</span> <span class="k">=</span> <span class="kc">false</span>
+
+<span class="c1">// when</span>
+<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">value</span> <span class="n">unless</span> <span class="n">errorsOccurred</span>
+
+<span class="c1">// then</span>
+<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="mi">200</span><span class="o">))</span>
+</pre></div>
 </div>
 </div>
 
