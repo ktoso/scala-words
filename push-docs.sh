@@ -17,7 +17,10 @@ find ./*html -type f -exec gsed -i 's/_static/static/' {} \;
 find ./*html -type f -exec gsed -i 's/_sources/sources/' {} \;
 find ./**/*html -type f -exec gsed -i 's/_sources/sources/' {} \;
 
-exit
+rm -rf static
+mkdir static
+mv _sources static/
+mv _static static/
 
 git add .
 git ci -m "Updating documentation @ $(date)"
