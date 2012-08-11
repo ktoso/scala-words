@@ -21,6 +21,8 @@ Unless for strings
 Unless instead of if
 --------------------
 
+Unless can be used as simple replacemet for ``if(!test)``:
+
 .. code-block:: scala
 
   import UnlessWord._
@@ -30,6 +32,20 @@ Unless instead of if
   }
 
   result should equal (Some("It"))
+
+As it returns an option, you can use the following idiom to implement something like an "else":
+
+.. code-block:: scala
+
+  // when
+  val it = unless (true) {
+    "Value"
+  } orElse {
+    Some("Else")
+  }
+
+  // then
+  it should equal (Some("Else"))
 
 Unless on values
 ----------------

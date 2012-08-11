@@ -12,6 +12,8 @@ trait UnlessWord {
 
   implicit def blockUnless[T](execute: => T) = new DoNotDoBlockUnlessTest(execute)
 
+  def unless[T](test: Boolean)(block: => T): Option[T] = if (!test) Some(block) else None
+
   class DoNotDoBlockUnlessTest[T](block: => T) {
 
     @aliasFor("unless")

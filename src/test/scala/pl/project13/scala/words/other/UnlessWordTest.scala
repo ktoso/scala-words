@@ -72,4 +72,54 @@ class UnlessWordTest extends FlatSpec with ShouldMatchers
     // then
     value should equal (Some(true))
   }
+
+  it should "act as an if(!test) replacement, for false" in {
+    // given
+    var branch = 0
+
+    // when
+    unless (false) {
+      branch = 1
+    }
+
+    // then
+    branch should equal (1)
+  }
+
+  it should "act as an if(!test) replacement, for true" in {
+    // given
+    var branch = 0
+
+    // when
+    unless (true) {
+      branch = 1
+    }
+
+    // then
+    branch should equal (0)
+  }
+
+  it should "return a value like if" in {
+    // when
+    val it = unless (false) {
+      "Value"
+    } orElse {
+      Some("Else")
+    }
+
+    // then
+    it should equal (Some("Value"))
+  }
+
+  it should "return return a value like if, and be cainable using orElse" in {
+    // when
+    val it = unless (true) {
+      "Value"
+    } orElse {
+      Some("Else")
+    }
+
+    // then
+    it should equal (Some("Else"))
+  }
 }
