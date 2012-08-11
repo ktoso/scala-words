@@ -1,6 +1,9 @@
 Getting Started
 ===============
 
+Getting Started
+---------------
+
 Dependencies
 ------------
 
@@ -24,6 +27,9 @@ So to include ScalaWords in your build use this snippet:
 
 How to use Words?
 =================
+
+How to use Words?
+-----------------
 
 Each Word (with one or two documented exceptions) can be used in one of the following ways:
 
