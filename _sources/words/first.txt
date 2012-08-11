@@ -1,0 +1,25 @@
+First
+=====
+
+Use Case
+--------
+You have a bunch of producers, which return ``Option[T]``, you want to keep trying one by one, until one of then returns ``Some``. FirstWord is useful here because it will not call the latter producers if one already returned what you want.
+
+First not None
+--------------
+
+Try a few producers until one of them returns Some. The latter providers won't be called:
+
+.. code-block:: scala
+
+  import FirstWord._
+  import SomeWord._
+  
+  var counter = 0
+  def tryObtain(): Option[String] = None
+  def doObtain(): Option[String] = {
+    ("Got " + counter).some
+  }
+
+  val it = firstNotNone(tryObtain, tryObtain, doObtain, doObtain)
+  it == Some("Got 0")
