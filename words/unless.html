@@ -103,6 +103,7 @@
 </div>
 <div class="section" id="unless-instead-of-if">
 <h2>Unless instead of if</h2>
+<p>Unless can be used as simple replacemet for <tt class="docutils literal"><span class="pre">if(!test)</span></tt>:</p>
 <div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
 
 <span class="k">val</span> <span class="n">result</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">unless</span> <span class="o">(</span><span class="kc">false</span><span class="o">)</span> <span class="o">{</span>
@@ -110,6 +111,18 @@
 <span class="o">}</span>
 
 <span class="n">result</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="s">&quot;It&quot;</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>As it returns an option, you can use the following idiom to implement something like an &#8220;else&#8221;:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// when</span>
+<span class="k">val</span> <span class="n">it</span> <span class="k">=</span> <span class="n">unless</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="s">&quot;Value&quot;</span>
+<span class="o">}</span> <span class="n">orElse</span> <span class="o">{</span>
+  <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;Else&quot;</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// then</span>
+<span class="n">it</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="s">&quot;Else&quot;</span><span class="o">))</span>
 </pre></div>
 </div>
 </div>
