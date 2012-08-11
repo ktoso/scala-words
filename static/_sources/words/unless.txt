@@ -25,9 +25,11 @@ Unless instead of if
 
   import UnlessWord._
   
-  val really = false
-  val executed = "executed".unless(really)
-  assert(executed == Some(true))
+  val result: Option[String] = unless (false) {
+    "It"
+  }
+
+  result should equal (Some("It"))
 
 Unless on values
 ----------------
@@ -57,3 +59,30 @@ On other values, it will generate an option, depenting on wether the condition w
 
   // then
   got should equal (Some(200))
+
+Unless on code blocks
+---------------------
+Using this trick, you may use UnlessWord just like you would the `Ruby unless modifier syntax`_.
+
+.. _Ruby unless modifier syntax: http://www.tutorialspoint.com/ruby/ruby_if_else.htm
+
+.. code-block:: scala
+
+  import Unless._
+
+  { logger.error("We had some errors!") } unless computationWentFine
+  { logger.error("We had some errors!") } ifNot computationWentFine 
+
+The above code will execute only if the computationWentFine value is `false`.
+This syntax may sometimes seem a bit misleading, so use it with caution.
+
+Such code block, returns the value returned by the block, but obviously wrapped in an Option, as it may not have been executed at all:
+
+.. code-block:: scala
+
+  import Unless._
+
+  val noErrorsFound = true
+  val value: Option[String] = { "Errors!" } unless noErrorsFound
+
+  value should equal (None)

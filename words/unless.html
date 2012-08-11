@@ -105,9 +105,11 @@
 <h2>Unless instead of if</h2>
 <div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UnlessWord._</span>
 
-<span class="k">val</span> <span class="n">really</span> <span class="k">=</span> <span class="kc">false</span>
-<span class="k">val</span> <span class="n">executed</span> <span class="k">=</span> <span class="s">&quot;executed&quot;</span><span class="o">.</span><span class="n">unless</span><span class="o">(</span><span class="n">really</span><span class="o">)</span>
-<span class="n">assert</span><span class="o">(</span><span class="n">executed</span> <span class="o">==</span> <span class="nc">Some</span><span class="o">(</span><span class="kc">true</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">result</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">unless</span> <span class="o">(</span><span class="kc">false</span><span class="o">)</span> <span class="o">{</span>
+  <span class="s">&quot;It&quot;</span>
+<span class="o">}</span>
+
+<span class="n">result</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="s">&quot;It&quot;</span><span class="o">))</span>
 </pre></div>
 </div>
 </div>
@@ -134,6 +136,27 @@
 
 <span class="c1">// then</span>
 <span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="mi">200</span><span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unless-on-code-blocks">
+<h2>Unless on code blocks</h2>
+<p>Using this trick, you may use UnlessWord just like you would the <a class="reference external" href="http://www.tutorialspoint.com/ruby/ruby_if_else.htm">Ruby unless modifier syntax</a>.</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">Unless._</span>
+
+<span class="o">{</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="o">(</span><span class="s">&quot;We had some errors!&quot;</span><span class="o">)</span> <span class="o">}</span> <span class="n">unless</span> <span class="n">computationWentFine</span>
+<span class="o">{</span> <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="o">(</span><span class="s">&quot;We had some errors!&quot;</span><span class="o">)</span> <span class="o">}</span> <span class="n">ifNot</span> <span class="n">computationWentFine</span>
+</pre></div>
+</div>
+<p>The above code will execute only if the computationWentFine value is <cite>false</cite>.
+This syntax may sometimes seem a bit misleading, so use it with caution.</p>
+<p>Such code block, returns the value returned by the block, but obviously wrapped in an Option, as it may not have been executed at all:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">Unless._</span>
+
+<span class="k">val</span> <span class="n">noErrorsFound</span> <span class="k">=</span> <span class="kc">true</span>
+<span class="k">val</span> <span class="n">value</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="s">&quot;Errors!&quot;</span> <span class="o">}</span> <span class="n">unless</span> <span class="n">noErrorsFound</span>
+
+<span class="n">value</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">None</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
