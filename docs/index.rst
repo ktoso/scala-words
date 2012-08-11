@@ -6,6 +6,7 @@ ScalaWords Docs
 
    intro/index
    verbs/index
+   words/index
 
 Links
 =====

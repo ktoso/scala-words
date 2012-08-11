@@ -12,10 +12,10 @@ class FirstWordTest extends FlatSpec with ShouldMatchers
     // given
     import SomeWord._
 
-    var counter = 0
+    var getSomeCalledTimes = 0
     def getNone(): Option[String] = None
     def getSome(): Option[String] = {
-      counter += 1
+      getSomeCalledTimes += 1
       "some".some
     }
 
@@ -24,6 +24,7 @@ class FirstWordTest extends FlatSpec with ShouldMatchers
 
     // then
     got should equal (Some("some"))
+    getSomeCalledTimes should equal (1)
   }
 
 
