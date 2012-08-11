@@ -1,6 +1,6 @@
 package pl.project13.scala.words.other
 
-object FirstWord {
+trait FirstWord {
 
   /**
    * Tries to obtain a T instance by trying all obtainers (sequentially).
@@ -21,3 +21,4 @@ object FirstWord {
 
 }
 
+object FirstWord extends FirstWord
