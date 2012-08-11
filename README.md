@@ -5,6 +5,29 @@ Travis CI Status
 ================
 [![Build Status](https://secure.travis-ci.org/ktoso/scala-words.png?branch=master)](http://travis-ci.org/ktoso/scala-words)
 
+Sbt / Maven - Dependency
+========================
+
+ScalaWords is published to Sonatype OSS and synced with **Maven Central**, so all you need to do is:
+
+for sbt:
+
+```scala
+val scalaWords = "pl.project13.scala" %% "words" % "0.1"
+
+libraryDependencies += scalaWords
+```
+
+for maven:
+
+```xml
+<dependency>
+  <groupId>pl.project13.scala</groupId>
+  <artifactId>words_2.9.1</rainbow>
+  <version>0.1</version>
+</dependency>
+```
+
 Documentation
 =============
 
