@@ -11,13 +11,20 @@ trait UniquifyVerb {
 
   implicit def list2uniquifiable[A](list: List[A]) = new UniquifiableList(list)
 
+  private def identity[A](a: A): A = a
+
   class UniquifiableList[A](list: List[A]) {
+    def uniquify: List[A] = UniquifyVerb.uniquifyBy[A, A](list)(identity)
+    def uniquified: List[A] = UniquifyVerb.uniquifyBy[A, A](list)(identity)
     def uniquifyOn[B](onKey: A => B): List[A] = UniquifyVerb.uniquifyBy[A, B](list)(onKey)
     def uniquifyByMerge[B](onKey: A => B)(merge: (A, A) => A): List[A] = UniquifyVerb.uniquifyByMerge[A, B](list)(onKey, merge)
   }
 
   def uniquify[A](list: List[A]): List[A] =
-    uniquifyBy(list) { a => a }
+    uniquifyBy(list)(a => a).toList
+
+  def uniquify[A](traversable: Traversable[A]): Traversable[A] =
+      uniquifyBy(traversable) { a => a }
 
   /**
    * Create a unique copy of the given list. Uniqueness is determined by the `onKey` predicate.
@@ -25,7 +32,7 @@ trait UniquifyVerb {
    * You should NOT depend on imlpementation details about which (first? last?) item will be kept
    * in the output collection.
    */
-  def uniquifyBy[A, B](list: List[A])(onKey: A => B): List[A] = {
+  def uniquifyBy[A, B](list: Traversable[A])(onKey: A => B): List[A] = {
     (mutable.Map[B, A]() ++ list.map(el => (onKey(el) -> el))).values.toList
   }
 
