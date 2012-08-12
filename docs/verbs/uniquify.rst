@@ -32,6 +32,9 @@ You may need to merge some events, using some kind of business logic ("don't rem
 using ``uniquifyByMerge`` you can easily do this:
 
 .. code-block:: scala
+  
+  import UniquifyVerb._
+  case class Data(a: Int, date: Int)
 
   // given
   val list = Data(1, date = 1) :: Data(1, date = 2) :: Data(1, date = 3) :: Data(2, date = 3) :: Nil
