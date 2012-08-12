@@ -6,5 +6,6 @@ Verbs
    do-to
    repeat
    timed
+   uniquify
    ask
 

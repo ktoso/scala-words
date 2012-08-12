@@ -1,0 +1,196 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>When &mdash; Scala Words - Documentation</title>
+    
+    <link rel="stylesheet" href="../static/style.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/prettify.css" type="text/css" />
+    <link rel="stylesheet" href="../static/base.css" type="text/css" />
+    <link rel="stylesheet" href="../static/docs.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Exo:300,400,600,700" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/toc.js"></script>
+    <script type="text/javascript" src="../static/prettify.js"></script>
+    <script type="text/javascript" src="../static/highlightCode.js"></script>
+    <script type="text/javascript" src="../static/effects.core.js"></script>
+    <script type="text/javascript" src="../static/effects.highlight.js"></script>
+    <script type="text/javascript" src="../static/scrollTo.js"></script>
+    <script type="text/javascript" src="../static/contentsFix.js"></script>
+    <script type="text/javascript" src="../static/ga.js"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link rel="top" title="Scala Words - Documentation" href="../index.html" />
+
+  </head>
+  <body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="navbar-logo">
+        </div>    
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="container">
+      <div class="page-title" style="padding-top:0.75em">
+        <a href="../index.html" style="color: white; background: url(../static/logo-small.png) no-repeat; height: 40px; padding-left: 62px; padding-top: 1em; margin-top: 1em; padding-bottom: 0.5em">
+        <span style="padding-bottom: 1em">When
+        </a>
+      </div>
+      <div class="pdf-link"><a href="../ScalaSlides.pdf"><img src="../static/pdf-icon.png" style="height: 40px;" /></a></div>
+    </div>
+    <div class="main-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">           
+              <li>
+              </li>
+              <li>
+                <a href="../index.html">Contents</a>
+              </li>
+              <li>
+              </li>
+              <li>
+                Version 0.1
+              </li>
+            </ul>         
+          </div>
+        </div>
+        <div class="row">
+          <div class="span9">
+            
+  <div class="section" id="when">
+<h1>When</h1>
+<div class="section" id="use-case">
+<h2>Use case</h2>
+<p>When should be treated as an extension of the traditional <tt class="docutils literal"><span class="pre">if</span></tt> statement, and as such, it should not be over used when a simple if is enough.</p>
+<p>It can however do more than if, like having an automatic else clause for values, turning them into Options or for Strings. Another notable feature is allowing a syntax similiar to Ruby&#8217;s if modifier (code if condition).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">When</span></tt> and <tt class="docutils literal"><span class="pre">Unless</span></tt> share functionality. All you can do with Unless works with When too. You can think of When like an if statement, and unless like an negated if statement.</p>
+</div>
+</div>
+<div class="section" id="when-for-strings">
+<h2>When for strings</h2>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">WhenWord._</span>
+
+<span class="k">val</span> <span class="n">itIsALie</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="k">val</span> <span class="n">msg</span> <span class="k">=</span> <span class="s">&quot;the cake is %sa lie.&quot;</span><span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;NOT &quot;</span><span class="o">.</span><span class="n">when</span><span class="o">(</span><span class="n">itIsALie</span><span class="o">))</span>
+<span class="n">assert</span> <span class="o">{</span> <span class="n">msg</span> <span class="o">==</span> <span class="s">&quot;the cake is a lie.&quot;</span> <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="when-on-values">
+<h2>When on values</h2>
+<p>On other values, it will generate an option, depenting on wether the condition was met or not.</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
+<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">12345</span>
+<span class="k">val</span> <span class="n">allGreen</span> <span class="k">=</span> <span class="kc">true</span>
+
+<span class="c1">// when</span>
+<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">value</span> <span class="n">when</span> <span class="n">allGreen</span>
+
+<span class="c1">// then</span>
+<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="mi">12345</span><span class="o">))</span>
+</pre></div>
+</div>
+<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
+<span class="k">val</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">200</span>
+<span class="k">val</span> <span class="n">allGreen</span> <span class="k">=</span> <span class="kc">false</span>
+
+<span class="c1">// when</span>
+<span class="k">val</span> <span class="n">got</span> <span class="k">=</span> <span class="n">value</span> <span class="n">when</span> <span class="n">allGreen</span>
+
+<span class="c1">// then</span>
+<span class="n">got</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">None</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="when-on-code-blocks">
+<h2>When on code blocks</h2>
+<p>Using this trick, you may use <tt class="docutils literal"><span class="pre">WhenWord</span></tt> just like you would use the ruby if modifier (code if something).</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">WhenWord._</span>
+
+<span class="k">val</span> <span class="n">noErrors</span> <span class="k">=</span> <span class="kc">true</span>
+<span class="o">{</span> <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="o">(</span><span class="s">&quot;Uff, no errors found!&quot;</span><span class="o">)</span> <span class="o">}</span> <span class="n">when</span> <span class="n">noErrors</span>
+</pre></div>
+</div>
+<p>The above code will execute only if the computationWentFine value is <cite>false</cite>.
+This syntax may sometimes seem a bit misleading, so use it with caution.</p>
+<p>Such code block, returns the value returned by the block, but obviously wrapped in an Option, as it may not have been executed at all:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">WhenWord._</span>
+
+<span class="k">val</span> <span class="n">noErrors</span> <span class="k">=</span> <span class="kc">false</span>
+<span class="k">val</span> <span class="n">value</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span> <span class="s">&quot;Errors!&quot;</span> <span class="o">}</span> <span class="n">unless</span> <span class="n">noErrors</span>
+
+<span class="n">value</span> <span class="n">should</span> <span class="n">equal</span> <span class="o">(</span><span class="nc">None</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="span3"><p class="contents-title">Contents</p>
+              <div id="scroller-anchor">
+                <div id="scroller">
+                  <div id="toc"></div>
+                </div>
+              </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+  <div class="container">
+    <ul>
+      <li><h5>ScalaWords</h5></li>
+      <li><a href="http://ktoso.github.com/scala-words">Documentation</a></li>
+      <li><a href="http://blog.project13.pl">Blog</a></li>
+    </ul>
+    <ul>
+      <li><h5>Contribute</h5></li>
+      <li><a href="http://github.com/ktoso/scala-words">Source Code</a></li>
+    </ul>
+    <ul>
+      <li><img src="../static/watermark.png" align="center"/></li>
+    </ul>
+  </div>
+  <div class="container copyright">
+    <p style="float: left;">
+      © 2012 <a href="http://blog.project13.pl">Project13.pl</a> <span class="license">ScalaWords is Open Source and available under the Apache 2 License.</span>
+    </p>
+    <p style="float: right; font-size: 12px;">
+      Last updated: Aug 12, 2012
+    </p>
+  </div>
+</div>
+<script type="text/javascript">
+  $('#toc').toc();
+</script>
+  
+
+  </body>
+</html>

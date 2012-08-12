@@ -47,6 +47,9 @@ As it returns an option, you can use the following idiom to implement something 
   // then
   it should equal (Some("Else"))
 
+Although personally I would discurrage using this construct, in favor of a plain if.
+Take a look at using blocks with unless, more "ruby style" to see it shine a bit more.
+
 Unless on values
 ----------------
 
