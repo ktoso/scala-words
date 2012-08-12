@@ -116,7 +116,10 @@
 <p>Imagine you have a stream of events, such as shopping cart operations you want to play back and uniquify on some key.
 You may need to merge some events, using some kind of business logic (&#8220;don&#8217;t remove items, just add them all&#8221; - for example),
 using <tt class="docutils literal"><span class="pre">uniquifyByMerge</span></tt> you can easily do this:</p>
-<div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">UniquifyVerb._</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Data</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">date</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+
+<span class="c1">// given</span>
 <span class="k">val</span> <span class="n">list</span> <span class="k">=</span> <span class="nc">Data</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">date</span> <span class="k">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Data</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">date</span> <span class="k">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Data</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">date</span> <span class="k">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Data</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">date</span> <span class="k">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">::</span> <span class="nc">Nil</span>
 
 <span class="c1">// when</span>
