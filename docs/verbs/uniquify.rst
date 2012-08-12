@@ -6,7 +6,7 @@ Use case
 You want to get an unique ``List``, and sadly a Set just won't cut it because uniqueness is determined by some key inside the data structure.
 
 Uniquify a List, based on some Key
-==================================
+----------------------------------
 Given some list of ``Data``, you want to get all unique Data elements, where uniqueness is determined by it's ``a`` value.
 
 .. code-block:: scala
@@ -26,7 +26,7 @@ Given some list of ``Data``, you want to get all unique Data elements, where uni
   uniques should (contain (Data(1, 3)) and contain (Data(2, 3)))
 
 Uniquify by merging data
-========================
+------------------------
 Imagine you have a stream of events, such as shopping cart operations you want to play back and uniquify on some key.
 You may need to merge some events, using some kind of business logic ("don't remove items, just add them all" - for example),
 using ``uniquifyByMerge`` you can easily do this:
@@ -49,7 +49,7 @@ using ``uniquifyByMerge`` you can easily do this:
 
 
 Uniquify other collections
-==========================
+--------------------------
 A basic uniquify is also available for other collections, such as Queues etc.
 Just use a plain ``uniquified``.
 
