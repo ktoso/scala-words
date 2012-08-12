@@ -92,9 +92,8 @@
 <h2>Use case</h2>
 <p>You want to get an unique <tt class="docutils literal"><span class="pre">List</span></tt>, and sadly a Set just won&#8217;t cut it because uniqueness is determined by some key inside the data structure.</p>
 </div>
-</div>
 <div class="section" id="uniquify-a-list-based-on-some-key">
-<h1>Uniquify a List, based on some Key</h1>
+<h2>Uniquify a List, based on some Key</h2>
 <p>Given some list of <tt class="docutils literal"><span class="pre">Data</span></tt>, you want to get all unique Data elements, where uniqueness is determined by it&#8217;s <tt class="docutils literal"><span class="pre">a</span></tt> value.</p>
 <div class="highlight-scala"><div class="highlight"><pre><span class="k">case</span> <span class="k">class</span> <span class="nc">Data</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
 
@@ -113,7 +112,7 @@
 </div>
 </div>
 <div class="section" id="uniquify-by-merging-data">
-<h1>Uniquify by merging data</h1>
+<h2>Uniquify by merging data</h2>
 <p>Imagine you have a stream of events, such as shopping cart operations you want to play back and uniquify on some key.
 You may need to merge some events, using some kind of business logic (&#8220;don&#8217;t remove items, just add them all&#8221; - for example),
 using <tt class="docutils literal"><span class="pre">uniquifyByMerge</span></tt> you can easily do this:</p>
@@ -134,7 +133,7 @@ using <tt class="docutils literal"><span class="pre">uniquifyByMerge</span></tt>
 </div>
 </div>
 <div class="section" id="uniquify-other-collections">
-<h1>Uniquify other collections</h1>
+<h2>Uniquify other collections</h2>
 <p>A basic uniquify is also available for other collections, such as Queues etc.
 Just use a plain <tt class="docutils literal"><span class="pre">uniquified</span></tt>.</p>
 <div class="highlight-scala"><div class="highlight"><pre><span class="c1">// given</span>
@@ -147,6 +146,7 @@ Just use a plain <tt class="docutils literal"><span class="pre">uniquified</span
 <span class="n">uniquified</span> <span class="n">should</span> <span class="n">have</span> <span class="n">length</span> <span class="o">(</span><span class="mi">3</span><span class="o">)</span>
 <span class="n">uniquified</span> <span class="n">should</span> <span class="o">(</span><span class="n">contain</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="n">and</span> <span class="n">contain</span> <span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="n">and</span> <span class="n">contain</span> <span class="o">(</span><span class="mi">3</span><span class="o">))</span>
 </pre></div>
+</div>
 </div>
 </div>
 
