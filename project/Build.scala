@@ -52,11 +52,12 @@ object BuildSettings {
   
   val buildSettings = Defaults.defaultSettings ++
     Seq(
-      organization := "pl.project13.scala",
-      name         := "words",
-      version      := "0.1",
-      scalaVersion := "2.9.1",
-      resolvers    ++= Resolver.withDefaultResolvers(kanbaneryResolvers, mavenCentral = true, scalaTools = false),
+      organization        := "pl.project13.scala",
+      name                := "words",
+      version             := "0.1",
+      scalaVersion        := "2.9.1",
+      crossScalaVersions  := Seq("2.9.1", "2.9.2", "2.10.0"),
+      resolvers           ++= Resolver.withDefaultResolvers(kanbaneryResolvers, mavenCentral = true, scalaTools = false),
       libraryDependencies ++= generalDependencies
     )
 

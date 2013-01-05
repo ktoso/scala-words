@@ -10,6 +10,7 @@ class UniquifyVerbTest extends FlatSpec with ShouldMatchers
 
   case class Data(a: Int, b: Int)
 
+
   it should "uniquify a list given a predicate (by implicits)" in {
     // given
     val list = Data(1, 1) :: Data(1, 2) :: Data(1, 3) :: Data(2, 3) :: Nil
